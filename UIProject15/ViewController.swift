@@ -6,34 +6,46 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
 
-    public var smileLabel: UILabel!
+    public var rickPicture: UIImageView = {
+        let picture = UIImageView()
+        picture.image = UIImage(named: "rick")
+        return picture
+    }()
+    
+    public var container: UIView = {
+        let containter = UIView()
+        containter.backgroundColor = .green
+        return containter
+    }()
+    
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
+        view.addSubview(container)
+        container.addSubview(rickPicture)
         
-        smileLabel = UILabel()
-        smileLabel.text = ":D"
-        smileLabel.textColor = .green
-        smileLabel.translatesAutoresizingMaskIntoConstraints = false
-        smileLabel.font = .boldSystemFont(ofSize: 25)
-        view.addSubview(smileLabel)
+        container.snp.makeConstraints { make in
+            
+            make.center.equalToSuperview()
+            make.height.width.equalToSuperview().multipliedBy(0.5)
+            
+        }
         
-        setConstraints()
+        rickPicture.snp.makeConstraints { make in
+
+            make.horizontalEdges.equalTo(container).offset(15)
+            make.verticalEdges.equalTo(container).inset(15)
+        }
+        
+       
     }
     
-    public func setConstraints() {
-        
-        NSLayoutConstraint.activate([
-            
-            smileLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            smileLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-    }
-
-
+   
 }
 
